@@ -76,7 +76,30 @@ Caused by:
                     }
                 }
 
-                clone_repo();
+                let repo_url = "https://github.com/0XYoussefX0/rustgrind";
+                let target_dir = "./rustgrind";
+                let result = process::Command::new("git")
+                    .arg("clone")
+                    .arg(repo_url)
+                    .arg(target_dir)
+                    .output();
+
+                match result {
+                    Ok(output) => {
+                        if !output.status.success() {
+                            let err_message = String::from_utf8_lossy(&output.stderr);
+                            eprintln!(
+                                "Error: Initialization failed\n\n Error Message: {}",
+                                err_message
+                            );
+                            process::exit(1)
+                        }
+                    }
+                    Err(err) => {
+                        eprintln!("Error: Initialization failed\n\n Error Message: {}", err);
+                        process::exit(1)
+                    }
+                }
 
                 let my_green = Color::TrueColor {
                     r: 34,
@@ -105,6 +128,35 @@ If you are just starting with Rustgrind, run the command `rustgrind init` to ini
                 "#
                 );
                 process::exit(1);
+            }
+
+            println!(
+                "{}",
+                r#"
+Is this your first time? No worries, Rustgrind is designed to help you improve at solving LeetCode-style problems while practicing Rust! Here's how it works:
+
+    1. Rustgrind is centered around the NeetCode 150 problems, carefully curated to strengthen your problem-solving and algorithmic thinking skills, all in Rust.
+
+    2. Keep your editor open in the rustgrind/ directory. Rustgrind will display the path of the current problem. Open the corresponding file, implement your solution, and save the file. Rustgrind will automatically detect changes, run the tests, and provide feedback. If all tests pass, you'll move on to the next problem.
+
+    3. If you're struggling, type h to see a hint for the current problem.
+
+    4. If a problem feels unclear or too challenging, open an issue on our GitHub page (https://github.com/0XYoussefX0/rustgrind). Fellow learners and maintainers are there to help!
+
+Rustgrind is your companion to mastering Rust and cracking coding interviews. Ready to grind?
+"#
+            );
+
+            let mut user_input = String::new();
+
+            loop {
+                io::stdin()
+                    .read_line(&mut user_input)
+                    .expect("Failed to read input");
+
+                if user_input.trim().is_empty() {
+                    break;
+                }
             }
 
             println!(
