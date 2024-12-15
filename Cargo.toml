@@ -1,8 +1,77 @@
+[workspace]
+resolver = "2"
+exclude = [
+  "tests/test_exercises",
+  "dev",
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = [
+    "Youssef Abelouas <youssef.abelouass@gmail.com>", # https://github.com/0XYoussefX0/ 
+]
+repository = "https://github.com/0XYoussefX0/rustgrind"
+license = "MIT"
+edition = "2021"
+rust-version = "1.83.0"
+
+[workspace.dependencies]
+serde = { version = "1.0.216", features = ["derive"] }
+toml_edit = { version = "0.22.22", default-features = false, features = ["parse", "serde"] }
+
 [package]
 name = "rustgrind"
-version = "0.1.0"
-edition = "2021"
+description = "Rustgrind is a collection of curated coding challenges based on the NeetCode 150, designed to help you practice problem-solving and algorithmic thinking while mastering Rust."
+version.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+keywords = [
+    "leetcode",
+    "algorithms",
+    "DSA",
+    "exercises",
+]
+include = [
+    "/src",
+    "/exercises/",
+    "/solutions/",
+    # A symlink to be able to include `dev/Cargo.toml` although `dev` is excluded.
+    "/dev-Cargo.toml",
+    "/README.md",
+    "/LICENSE"
+]
 
 [dependencies]
+anyhow = "1.0.94"
 clap = { version = "4.5.23", features = ["derive"] }
 colored = "2.0.4"
+crossterm = "0.9"
+serde.workspace = true
+toml_edit.workspace = true
+rustlings-macros = { path = "rustlings-macros", version = "=0.1.0" }
+
+
+[profile.release]
+panic = "abort"
+
+[profile.dev]
+panic = "abort"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unstable_features = "forbid"
+
+[workspace.lints.clippy]
+empty_loop = "forbid"
+disallowed-types = "deny"
+disallowed-methods = "deny"
+infinite_loop = "deny"
+mem_forget = "deny"
+dbg_macro = "warn"
+todo = "warn"
+
+[lints]
+workspace = true
