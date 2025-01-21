@@ -33,7 +33,7 @@ name = "01_intro"
 dir = "01_Arrays_&_Hashing"
 test = false
 skip_check_unsolved = true
-hint = [
+hints = [
 """
 Enter `n` to move on to the next exercise.
 You might need to press ENTER after typing `n`."""
@@ -44,7 +44,7 @@ You might need to press ENTER after typing `n`."""
 name = "02_two_sum"
 dir = "01_Arrays_&_Hashing"
 test = false
-hint = [
+hints = [
     """
     Todo
     """
@@ -54,7 +54,7 @@ hint = [
 name = "03_contains_duplicate"
 dir = "01_Arrays_&_Hashing"
 test = false
-hint = [
+hints = [
     """
     Todo
     """
@@ -64,7 +64,7 @@ hint = [
 name = "04_valid_anagram"
 dir = "01_Arrays_&_Hashing"
 test = false
-hint = [
+hints = [
     """
     Todo
     """
